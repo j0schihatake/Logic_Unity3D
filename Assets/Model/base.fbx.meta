@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: 9a465c1bbe9ee444a8e8314d7c68b712
+timeCreated: 1466313221
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Buttton
+    100004: Buttton.001
+    100006: Buttton.002
+    100008: Buttton.003
+    100010: Buttton.004
+    100012: Buttton.005
+    100014: Buttton.006
+    100016: Buttton.007
+    100018: Buttton.008
+    100020: Buttton.009
+    100022: Buttton.010
+    100024: Buttton.011
+    100026: Buttton.012
+    100028: Buttton.013
+    100030: Buttton.014
+    100032: Buttton.015
+    100034: Cube
+    400000: //RootNode
+    400002: Buttton
+    400004: Buttton.001
+    400006: Buttton.002
+    400008: Buttton.003
+    400010: Buttton.004
+    400012: Buttton.005
+    400014: Buttton.006
+    400016: Buttton.007
+    400018: Buttton.008
+    400020: Buttton.009
+    400022: Buttton.010
+    400024: Buttton.011
+    400026: Buttton.012
+    400028: Buttton.013
+    400030: Buttton.014
+    400032: Buttton.015
+    400034: Cube
+    2300000: Buttton
+    2300002: Buttton.001
+    2300004: Buttton.002
+    2300006: Buttton.003
+    2300008: Buttton.004
+    2300010: Buttton.005
+    2300012: Buttton.006
+    2300014: Buttton.007
+    2300016: Buttton.008
+    2300018: Buttton.009
+    2300020: Buttton.010
+    2300022: Buttton.011
+    2300024: Buttton.012
+    2300026: Buttton.013
+    2300028: Buttton.014
+    2300030: Buttton.015
+    2300032: Cube
+    3300000: Buttton
+    3300002: Buttton.001
+    3300004: Buttton.002
+    3300006: Buttton.003
+    3300008: Buttton.004
+    3300010: Buttton.005
+    3300012: Buttton.006
+    3300014: Buttton.007
+    3300016: Buttton.008
+    3300018: Buttton.009
+    3300020: Buttton.010
+    3300022: Buttton.011
+    3300024: Buttton.012
+    3300026: Buttton.013
+    3300028: Buttton.014
+    3300030: Buttton.015
+    3300032: Cube
+    4300000: Cube
+    4300002: Buttton.015
+    4300004: Buttton.014
+    4300006: Buttton.013
+    4300008: Buttton.012
+    4300010: Buttton.011
+    4300012: Buttton.010
+    4300014: Buttton.009
+    4300016: Buttton.008
+    4300018: Buttton.007
+    4300020: Buttton.006
+    4300022: Buttton.005
+    4300024: Buttton.004
+    4300026: Buttton.003
+    4300028: Buttton.002
+    4300030: Buttton.001
+    4300032: Buttton
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
