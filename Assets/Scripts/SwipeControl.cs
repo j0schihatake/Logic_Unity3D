@@ -31,7 +31,7 @@ public class SwipeControl : MonoBehaviour {
 	public float timeBegan = 0.0f;									//время когда палец коснулся
 	public float timeMoved = 0.0f;									//все время за которое палец перемещался
 	public float timeStationary = 0.0f;								//время когда палец косался но был неподвижен
-	public float timeEnded = 0.0f;									//время когда палец был убран
+	public float timeEnded = 0.0f;                                  //время когда палец был убран
 
 	//определяем направление свайпа:
 	public SwipeDirection swipeDirection;
@@ -66,11 +66,11 @@ public class SwipeControl : MonoBehaviour {
 			Touch touch = Input.touches[0];
 			if (positionIsRect (touch.position)) {
 				switch (touch.phase) {
-				case TouchPhase.Began:													//начало прикосновения
+				case TouchPhase.Began:													// начало прикосновения
 					inRect = true;
 					clear ();
 					swipeStartPos = touch.position;
-					timeBegan = Time.time;												//запоминаем время
+					timeBegan = Time.time;												// запоминаем время
 					onTach.Invoke ();
 					//Debug.Log ("Я работаю");
 					break;
@@ -82,14 +82,14 @@ public class SwipeControl : MonoBehaviour {
 					timeMoved += touch.deltaTime;
 
 					break;
-				case TouchPhase.Stationary:												//палец с последнего момента не двигался
+				case TouchPhase.Stationary:												// палец с последнего момента не двигался
 //					timeStationary += touch.deltaTime;
 //					time += touch.deltaTime;
 //					wasAUpdateTach = true;
 //					onTachUpdate.Invoke ();
 					break;
-				case TouchPhase.Ended:                                                  //палец убран
-                                                                                        //по идее если мы не здвинули палец с места то возможно что мы выбралиобьект
+				case TouchPhase.Ended:                                                  // палец убран
+                                                                                        // по идее если мы не здвинули палец с места то возможно что мы выбрали обьект
                         if (swipeStartPos == touch.position)
                         {
                             wasAOneTach = true;
@@ -108,15 +108,14 @@ public class SwipeControl : MonoBehaviour {
 				default:
 					break;
 				}
-			} ///*
-			else {
+			} else {
 				if(inRect){
 					inRect = false;
 					cancels (touch);
 				}
 			}
-		//*/
 		}
+		Base.Instance.ButtonMove();
 	}
 
 	//метод определяет свайпы только на нашем ректе

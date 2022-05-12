@@ -13,7 +13,7 @@ public class Base : MonoBehaviour {
     public SwipeControl controll = null;
 
     //ссылка на класс рекламы:
-    public UnityADSJ0schi unityADS = null;
+    //public UnityADSJ0schi unityADS = null;
     int restartCount = 1;
 
     public static Base Instance = null;
@@ -52,13 +52,19 @@ public class Base : MonoBehaviour {
     void Update() {
         
         //Если кнопка которую мы собираемся двигать уже выбрана:
-        if (selectedButton != null) {
+        if (selectedButton != null && Base.Instance.IsMoving) {
             //Выполняем перемещение нашей кнопки
                 move(nextPosition);
         }
+    }
+
+    public void ButtonMove()
+    {
         //Обрабатываем свайпы:
-        switch (controll.swipeDirection) {
+        switch(controll.swipeDirection)
+        {
             case SwipeControl.SwipeDirection.Up:
+                Debug.Log("Переместить вверх.");
                 moveUp();
                 break;
             case SwipeControl.SwipeDirection.Down:
@@ -74,31 +80,25 @@ public class Base : MonoBehaviour {
     }
 
     //метод определяет победили ли мы
-    void winner() {
-        bool allComplete = true;
+    bool winner() {
+        bool result = true;
         for (int i = 0; i < buttonsList.Count; i++) {
             Buttons sel = buttonsList[i];
-            if (sel.recuiredPosition == pointList[sel.myPointPosition])
-            {}
-            else {
-                allComplete = false;
+            if(sel.recuiredPosition != pointList[sel.myPointPosition])
+            {
+                return false;
             }
         }
-        if (allComplete)
-        {
-            win.SetActive(true);
-        }
-        else {
-            win.SetActive(false);
-        }
+        return result;
     }
 
     //Метод срабатывает при нажатии на кнопку старт:
     public void restart() {
+        Debug.Log("Tach to restart.");
         //каждый второй раз пытаемся запустить рекламу:
-        if (restartCount % 2 ==0) {
-            unityADS.schoowADS();
-        }
+        //if (restartCount % 2 ==0) {
+        //    unityADS.schoowADS();
+        //}
         //выключаем кубок
         win.SetActive(false);
         //сортируем случайным образом кнопки
@@ -116,6 +116,28 @@ public class Base : MonoBehaviour {
         {
             sortedPoints.Add(points[j]);
         }
+
+        for(int i = 0;i < buttonsList.Count; i++ ) {
+            randomPoint = sortedPoints[getRandomInt(sortedPoints.Count)];
+            randomButton = buttonsList[i];
+            randomPoint.empty = false;
+            //ставим кнопку на ннужное место:
+            randomButton.transform.position = randomPoint.pointPosition;
+            randomButton.myPointPosition = randomPoint.pointPosition;
+            randomButton.rend.material.color = randomButton.myColor;
+            //Удаляем point чтобы он не участвовал в рандоме.
+            sortedPoints.Remove(randomPoint);
+
+            if(i == buttonsList.Count - 1) {
+                //делаем оставшийся поинт свободным
+                sortedPoints[0].empty = true;
+                //очищаем текущее выделение:
+                selectedButton = null;
+                nextPosition = Vector3.zero;
+            }
+        }
+
+        /*
         while (sort) {
             //теперь делаем от цикла к циклу следующее:
             if (sortedButtons.Count > 0)
@@ -143,6 +165,7 @@ public class Base : MonoBehaviour {
             }
         }
         restartCount += 1;
+        */
     }
 
     //метод возвращает случайный инт
@@ -153,22 +176,31 @@ public class Base : MonoBehaviour {
 
 //-----------------------------------------------------------------Перемещение по методам--------------------------(ВНИМАНИЕ! так-как расположено во второй четверти кординат знаки другие!)
     public void moveUp() {
+
+        Debug.Log("Свайп вверх старт!");
         //теперь если выполнен свайп вверх мы просто проверяем:
         if (selectedButton != null)
         {
             testVector = selectedButton.myPointPosition;
             testVector.z -= zStep;
             //есть ли вообще такой поинт:
-            if (pointList.ContainsKey(testVector))
+            if(pointList.ContainsKey(testVector))
             {
                 //теперь проверяем а не занят ли он
-                if (pointList[testVector].empty)
+                if(pointList[testVector].empty)
                 {
                     //то перемещаем сюда кнопку:
                     pointList[testVector].empty = false;
                     pointList[selectedButton.myPointPosition].empty = true;
                     nextPosition = pointList[testVector].pointPosition;
+                    Base.Instance.IsMoving = true;
                 }
+                else {
+                    Debug.Log("Свайп вверх невозможен клетка вверху занята.");
+                }
+            }
+            else {
+                Debug.Log("Свайп вверх невозможен нет такой позиции.");
             }
         }
     }
@@ -181,16 +213,23 @@ public class Base : MonoBehaviour {
             testVector = selectedButton.myPointPosition;
             testVector.z += zStep;
             //есть ли вообще такой поинт:
-            if (pointList.ContainsKey(testVector))
+            if(pointList.ContainsKey(testVector))
             {
                 //теперь проверяем а не занят ли он
-                if (pointList[testVector].empty)
+                if(pointList[testVector].empty)
                 {
                     //то перемещаем сюда кнопку:
                     pointList[testVector].empty = false;
                     pointList[selectedButton.myPointPosition].empty = true;
                     nextPosition = pointList[testVector].pointPosition;
+                    Base.Instance.IsMoving = true;
                 }
+                else {
+                    Debug.Log("Свайп вниз невозможен клетка вверху занята.");
+                }
+            }
+            else {
+                Debug.Log("Свайп вниз невозможен нет такой позиции.");
             }
         }
     }
@@ -198,44 +237,58 @@ public class Base : MonoBehaviour {
     public void moveRight()
     {
         //теперь если выполнен свайп вверх мы просто проверяем:
-        if (selectedButton != null)
+        if(selectedButton != null)
         {
             testVector = selectedButton.myPointPosition;
             testVector.x -= zStep;
             //есть ли вообще такой поинт:
-            if (pointList.ContainsKey(testVector))
+            if(pointList.ContainsKey(testVector))
             {
                 //теперь проверяем а не занят ли он
-                if (pointList[testVector].empty)
+                if(pointList[testVector].empty)
                 {
                     //то перемещаем сюда кнопку:
                     pointList[testVector].empty = false;
                     pointList[selectedButton.myPointPosition].empty = true;
                     nextPosition = pointList[testVector].pointPosition;
+                    Base.Instance.IsMoving = true;
                 }
             }
+            else {
+                Debug.Log("Свайп вправо невозможен клетка вверху занята.");
+            }
+        }
+        else {
+            Debug.Log("Свайп вправо невозможен нет такой позиции.");
         }
     }
 
     public void moveLeft()
     {
         //теперь если выполнен свайп вверх мы просто проверяем:
-        if (selectedButton != null)
+        if(selectedButton != null)
         {
             testVector = selectedButton.myPointPosition;
             testVector.x += zStep;
             //есть ли вообще такой поинт:
-            if (pointList.ContainsKey(testVector))
+            if(pointList.ContainsKey(testVector))
             {
                 //теперь проверяем а не занят ли он
-                if (pointList[testVector].empty)
+                if(pointList[testVector].empty)
                 {
                     //то перемещаем сюда кнопку:
                     pointList[testVector].empty = false;
                     pointList[selectedButton.myPointPosition].empty = true;
                     nextPosition = pointList[testVector].pointPosition;
+                    Base.Instance.IsMoving = true;
                 }
             }
+            else {
+                Debug.Log("Свайп влево невозможен клетка слева занята.");
+            }
+        }
+        else {
+            Debug.Log("Свайп влево невозможен нет такой позиции.");
         }
     }
 
@@ -243,7 +296,7 @@ public class Base : MonoBehaviour {
     //Выполнение перемещения к точке:
     void move(Vector3 nextPosition)
     {
-        if (selectedButton != null & nextPosition!=Vector3.zero) {
+        if (selectedButton != null) {
             if (selectedButton.transform.position != nextPosition)
             {
                 IsMoving = true;
@@ -255,7 +308,7 @@ public class Base : MonoBehaviour {
                 selectedButton.myPointPosition = nextPosition;
                 nextPosition = Vector3.zero;
                 IsMoving = false;
-                winner();
+                win.SetActive(winner());
             }
         }
     }
